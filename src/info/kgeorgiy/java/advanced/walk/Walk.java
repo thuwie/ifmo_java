@@ -10,8 +10,8 @@ import java.util.Set;
 
 public class Walk {
     public static void main(String[] args) {
-        String inputFile = args[0];
-        String outputFile = args[1];
+        File inputFile = new File(args[0]);
+        File outputFile = new File(args[1]);
         Set<Path> paths;
         Set<String> checksum;
 
@@ -25,14 +25,14 @@ public class Walk {
     }
 
 
-    private Walk(String iF, String oF) {
+    private Walk(File iF, File oF) {
         inputFile = iF;
         outputFile = oF;
     }
 
-    private String inputFile;
+    private File inputFile;
 
-    private String outputFile;
+    private File outputFile;
 
     private Set<String> calculateChecksums(Set<Path> paths) {
         int CHUNK_SIZE = 1024;
@@ -59,7 +59,7 @@ public class Walk {
 
     private Set<Path> readFile() {
         Set<Path> parsedPaths = new LinkedHashSet<>();
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(this.inputFile), StandardCharsets.UTF_8)) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), StandardCharsets.UTF_8))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 parsedPaths.add(Paths.get(line));
@@ -71,7 +71,7 @@ public class Walk {
     }
 
     private void writeFile(Set<String> answer) {
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(this.outputFile), StandardCharsets.UTF_8)) {
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), StandardCharsets.UTF_8))) {
             for (String path : answer) {
                 writer.write(path);
             }
