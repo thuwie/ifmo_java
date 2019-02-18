@@ -10,6 +10,11 @@ import java.util.Set;
 
 public class Walk {
     public static void main(String[] args) {
+        if (args == null || args.length != 2 || args[0] == null || args[1] == null) {
+            System.err.println("Corrupted arguments");
+//            System.exit(0);
+            return;
+        }
         File inputFile = new File(args[0]);
         File outputFile = new File(args[1]);
         Set<Path> paths;
