@@ -1,4 +1,0 @@
-4e037970 src\info\kgeorgiy\java\advanced\walk\samples\one.txt
-8cea7b8f src\info\kgeorgiy\java\advanced\walk\samples\two
-38510524 src\info\kgeorgiy\java\advanced\walk\samples\binary.pdf
-00000000 src\info\kgeorgiy\java\advanced\walk\samples\no-such

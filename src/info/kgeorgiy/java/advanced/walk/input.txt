@@ -1,5 +1,0 @@
-src/info/kgeorgiy/java/advanced/walk/samples/one.txt
-src/info/kgeorgiy/java/advanced/walk/samples/two
-src/info/kgeorgiy/java/advanced/walk/samples/binary.pdf
-src/info/kgeorgiy/java/advanced/walk/samples/one.txt
-src/info/kgeorgiy/java/advanced/walk/samples/no-such
