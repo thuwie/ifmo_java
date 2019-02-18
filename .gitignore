@@ -1,4 +1,4 @@
 .idea
 ifmo_java.iml
 out
-src/edu/konovalov/samples/*
+*/samples/*
