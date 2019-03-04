@@ -8,10 +8,14 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Walk {
+    private final int CHUNK_SIZE = 1024;
+    private final int FNV_32_INIT = 0x811c9dc5;
+    private final int FNV_32_PRIME = 0x01000193;
+
+
     public static void main(String[] args) {
         if (args == null || args.length != 2 || args[0] == null || args[1] == null) {
             System.err.println("Corrupted arguments");
-//            System.exit(0);
             return;
         }
         String fileIn = args[0];
@@ -24,9 +28,6 @@ public class Walk {
 
         paths = walk.readFile();
         walk.summarizeChecksums(paths);
-
-
-//        walk.writeFile(checksum);
     }
 
 
@@ -35,15 +36,9 @@ public class Walk {
         outputFile = oF;
     }
 
-    private File inputFile;
-
-    private File outputFile;
+    private File inputFile, outputFile;
 
     private void summarizeChecksums(Set<String> paths) {
-        int CHUNK_SIZE = 1024;
-        int FNV_32_INIT = 0x811c9dc5;
-        int FNV_32_PRIME = 0x01000193;
-        LinkedHashSet<String> checksums = new LinkedHashSet<>();
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), StandardCharsets.UTF_8))) {
             for (String path : paths) {
                 try (FileInputStream inputStream = new FileInputStream(Paths.get(path).toFile())) {
@@ -74,33 +69,7 @@ public class Walk {
             }
         } catch (InvalidPathException | IOException e) {
             System.err.format("IOException");
-//            System.out.println(e);
         }
         return parsedPaths;
     }
-
-    private void writeFile(Set<String> answer) {
-        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), StandardCharsets.UTF_8))) {
-            writer.write("");
-            for (String path : answer) {
-                writer.write(path);
-            }
-        } catch (IOException e) {
-            System.err.format("IOException");
-//            System.out.println(e);
-        }
-    }
-
-    private void writeToFile(String answer) {
-        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), StandardCharsets.UTF_8))) {
-
-            writer.write(answer);
-
-        } catch (IOException e) {
-            System.err.format("IOException");
-//            System.out.println(e);
-        }
-    }
-
-
 }
