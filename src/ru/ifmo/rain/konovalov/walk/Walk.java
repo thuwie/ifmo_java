@@ -1,8 +1,9 @@
-package info.kgeorgiy.java.advanced.walk;
+package ru.ifmo.rain.konovalov.walk;
 
 import java.io.*;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedHashSet;
@@ -15,8 +16,10 @@ public class Walk {
 //            System.exit(0);
             return;
         }
-        File inputFile = new File(args[0]);
-        File outputFile = new File(args[1]);
+        String fileIn = args[0];
+        String fileOut = args[1];
+        File inputFile = new File(fileIn);
+        File outputFile = new File(fileOut);
         Set<Path> paths;
         Set<String> checksum;
 
@@ -69,19 +72,22 @@ public class Walk {
             while ((line = reader.readLine()) != null) {
                 parsedPaths.add(Paths.get(line));
             }
-        } catch (IOException e) {
-            System.err.format("IOException: %s", e);
+        } catch (InvalidPathException | IOException e) {
+            System.err.format("IOException");
+//            System.out.println(e);
         }
         return parsedPaths;
     }
 
     private void writeFile(Set<String> answer) {
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), StandardCharsets.UTF_8))) {
+            writer.write("");
             for (String path : answer) {
                 writer.write(path);
             }
         } catch (IOException e) {
-            System.err.format("IOException: %s", e);
+            System.err.format("IOException");
+//            System.out.println(e);
         }
     }
 
