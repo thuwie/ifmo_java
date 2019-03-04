@@ -1,3 +1,6 @@
 .idea
 ifmo_java.iml
 out
+test
+*.in
+*.out
